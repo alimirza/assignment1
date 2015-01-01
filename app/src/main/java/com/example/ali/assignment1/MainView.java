@@ -3,7 +3,6 @@ package com.example.ali.assignment1;
 import android.content.Context;
 import android.view.View;
 import android.widget.Button;
-import android.content.Intent;
 
 /**
  * Created by ali on 15-09-30.

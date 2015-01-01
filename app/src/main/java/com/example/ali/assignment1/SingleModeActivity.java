@@ -13,8 +13,6 @@ import android.widget.TextView;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Random;
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
 
 public class SingleModeActivity extends AppCompatActivity {
 
