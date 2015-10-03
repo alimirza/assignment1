@@ -1,16 +1,51 @@
 package com.example.ali.assignment1;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Button singleModeButton;
+    private Button gameshowModeButton;
+    private Button statsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        this.singleModeButton = (Button) findViewById(R.id.singleModeButton);
+        this.gameshowModeButton = (Button) findViewById(R.id.gameshowModeButton);
+        this.statsButton = (Button) findViewById(R.id.statsButton);
+
+        this.singleModeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent singleModeIntent = new Intent(MainActivity.this, SingleModeActivity.class);
+                MainActivity.this.startActivity(singleModeIntent);
+            }
+        });
+
+        this.gameshowModeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        this.statsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
     }
 
     @Override
