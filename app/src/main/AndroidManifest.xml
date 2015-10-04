@@ -24,6 +24,22 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.ali.assignment1.MainActivity" />
         </activity>
+        <activity
+            android:name=".PlayerSelectionActivity"
+            android:label="@string/title_activity_player_selection"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.ali.assignment1.MainActivity" />
+        </activity>
+        <activity
+            android:name=".GameshowModeActivity"
+            android:label="@string/title_activity_gameshow_mode"
+            android:parentActivityName=".PlayerSelectionActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.ali.assignment1.PlayerSelectionActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -35,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
         this.gameshowModeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent gameshowModeIntent = new Intent(MainActivity.this, PlayerSelectionActivity.class);
+                MainActivity.this.startActivity(gameshowModeIntent);
             }
         });
 
