@@ -22,6 +22,7 @@ public class SingleModeActivity extends AppCompatActivity {
     private TextView clickNowText;
     private StopWatch stopWatch;
     private Integer randomTime;
+    private ReactionTimeStatistics reactionTimeStatistics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class SingleModeActivity extends AppCompatActivity {
         singleModeClickerButton = (Button) findViewById(R.id.singleModeClickerButton);
         clickNowText = (TextView) findViewById(R.id.clickNowText);
         stopWatch = new StopWatch();
+        reactionTimeStatistics = new ReactionTimeStatistics(getBaseContext());
 
         singleModeClickerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,6 +41,8 @@ public class SingleModeActivity extends AppCompatActivity {
 
                 if (clickNowText.getVisibility() == View.VISIBLE) {
                     stopWatch.stopTimer();
+                    reactionTimeStatistics.addTime(stopWatch.getDeltaTime());
+                    reactionTimeStatistics.save(getBaseContext());
                     showDialog("Reaction Time", stopWatch.getDeltaTime());
                 }
                 else if (clickNowText.getVisibility() == View.INVISIBLE) {

@@ -6,4 +6,5 @@
     <string name="title_activity_single_mode">SingleModeActivity</string>
     <string name="title_activity_player_selection">PlayerSelectionActivity</string>
     <string name="title_activity_gameshow_mode">GameshowModeActivity</string>
+    <string name="title_activity_statistics">StatisticsActivity</string>
 </resources>
