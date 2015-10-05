@@ -4,7 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
@@ -22,17 +24,38 @@ import java.util.ArrayList;
 public class StatisticsActivity extends AppCompatActivity {
 
     private ListView listView;
+    private Button showBuzzerStatsButton;
     private ArrayList<String> reactionTimes = new ArrayList<String>();
+    public ArrayAdapter<String> adapter2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
-        ReactionTimeStatistics x = new ReactionTimeStatistics(getBaseContext());
+
+        showBuzzerStatsButton = (Button) findViewById(R.id.showBuzzerStatsButton);
         listView = (ListView) findViewById(R.id.listView);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+
+        ReactionTimeStatistics x = new ReactionTimeStatistics(getBaseContext());
+        BuzzerStatistics y = new BuzzerStatistics(getBaseContext());
+
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this,
                 R.layout.stats_list_item,R.id.listItemValue, x.getResultsList());
-        listView.setAdapter(adapter);
+        listView.setAdapter(adapter1);
+
+        adapter2 = new ArrayAdapter<String>(this,
+                R.layout.stats_list_item,R.id.listItemValue, y.getResultsList());
+
+
+        showBuzzerStatsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listView.setAdapter(adapter2);
+
+            }
+        });
+
+
 
     }
 

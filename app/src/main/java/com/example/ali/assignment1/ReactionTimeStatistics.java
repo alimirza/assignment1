@@ -27,26 +27,10 @@ public class ReactionTimeStatistics {
     public ArrayList<String> getResultsList() {
         return resultsList;
     }
-    public ArrayList<String> getResultsHeaders() {
-        return resultsHeaders;
-    }
 
     private ArrayList<String> resultsList;
-    private ArrayList<String> resultsHeaders = new ArrayList<String>();
 
     public ReactionTimeStatistics(Context context) {
-        resultsHeaders.add("Minimum time of all reaction times");
-        resultsHeaders.add("Minimum time of last 10 reaction times");
-        resultsHeaders.add("Minimum time of last 100 reaction times");
-        resultsHeaders.add("Maximum time of all reaction times");
-        resultsHeaders.add("Maximum time of last 10 reaction times");
-        resultsHeaders.add("Maximum time of last 100 reaction times");
-        resultsHeaders.add("Average time of all reaction times");
-        resultsHeaders.add("Average time of last 10 reaction times");
-        resultsHeaders.add("Average time of last 100 reaction times");
-        resultsHeaders.add("Median time of all reaction times");
-        resultsHeaders.add("Median time of last 10 reaction times");
-        resultsHeaders.add("Median time of last 100 reaction times");
         loadFromFile(context);
         updateResultsList();
     }
@@ -66,23 +50,23 @@ public class ReactionTimeStatistics {
         resultsList.add("empty");
         resultsList.add("empty");
         if (allTimesList.size() > 0) {
-            resultsList.set(0,"Minimum time of all reaction times" + String.valueOf(Collections.min(allTimesList)));
-            resultsList.set(3,"Maximum time of all reaction times" + String.valueOf(Collections.max(allTimesList)));
-            resultsList.set(6,"Average time of all reaction times" + String.valueOf(calculateAverage(allTimesList, allTimesList.size())));
-            resultsList.set(9,"Median time of all reaction times" + String.valueOf(calculateMedian(allTimesList, allTimesList.size())));
+            resultsList.set(0,"Minimum time of all reaction times: " + String.valueOf(Collections.min(allTimesList)));
+            resultsList.set(3,"Maximum time of all reaction times: " + String.valueOf(Collections.max(allTimesList)));
+            resultsList.set(6,"Average time of all reaction times: " + String.valueOf(calculateAverage(allTimesList, allTimesList.size())));
+            resultsList.set(9,"Median time of all reaction times: " + String.valueOf(calculateMedian(allTimesList, allTimesList.size())));
         }
 
         if (allTimesList.size() > 9){
-            resultsList.set(1, "Minimum time of last 10 reaction times" + String.valueOf(Collections.min(allTimesList.subList(allTimesList.size() - 10, allTimesList.size()))));
-            resultsList.set(4, "Maximum time of last 10 reaction times" + String.valueOf(Collections.max(allTimesList.subList(allTimesList.size() - 10, allTimesList.size()))));
-            resultsList.set(7,"Average time of last 10 reaction times" + String.valueOf(calculateAverage(allTimesList, 10)));
+            resultsList.set(1, "Minimum time of last 10 reaction times: " + String.valueOf(Collections.min(allTimesList.subList(allTimesList.size() - 10, allTimesList.size()))));
+            resultsList.set(4, "Maximum time of last 10 reaction times: " + String.valueOf(Collections.max(allTimesList.subList(allTimesList.size() - 10, allTimesList.size()))));
+            resultsList.set(7,"Average time of last 10 reaction times: " + String.valueOf(calculateAverage(allTimesList, 10)));
             resultsList.set(10,"Median time of last 10 reaction times" + String.valueOf(calculateMedian(allTimesList, 10)));
         }
         if (allTimesList.size() > 99){
-            resultsList.set(2, "Minimum time of last 100 reaction times" + String.valueOf(Collections.min(allTimesList.subList(allTimesList.size() - 100, allTimesList.size()))));
-            resultsList.set(5, "Maximum time of last 100 reaction times" + String.valueOf(Collections.max(allTimesList.subList(allTimesList.size() - 100, allTimesList.size()))));
-            resultsList.set(8, "Average time of last 100 reaction times" + String.valueOf(calculateAverage(allTimesList, 100)));
-            resultsList.set(11,"Median time of last 100 reaction times" + String.valueOf(calculateMedian(allTimesList, 100)));
+            resultsList.set(2, "Minimum time of last 100 reaction times: " + String.valueOf(Collections.min(allTimesList.subList(allTimesList.size() - 100, allTimesList.size()))));
+            resultsList.set(5, "Maximum time of last 100 reaction times: " + String.valueOf(Collections.max(allTimesList.subList(allTimesList.size() - 100, allTimesList.size()))));
+            resultsList.set(8, "Average time of last 100 reaction times: " + String.valueOf(calculateAverage(allTimesList, 100)));
+            resultsList.set(11,"Median time of last 100 reaction times: " + String.valueOf(calculateMedian(allTimesList, 100)));
         }
     }
 

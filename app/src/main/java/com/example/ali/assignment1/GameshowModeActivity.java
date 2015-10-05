@@ -16,6 +16,7 @@ public class GameshowModeActivity extends AppCompatActivity {
     private Button playerTwoButton;
     private Button playerThreeButton;
     private Button playerFourButton;
+    private BuzzerStatistics buzzerStatistics;
 
 
     @Override
@@ -44,16 +45,21 @@ public class GameshowModeActivity extends AppCompatActivity {
         playerTwoButton = (Button) findViewById(R.id.playerTwoButton);
         playerThreeButton = (Button) findViewById(R.id.playerThreeButton);
         playerFourButton = (Button) findViewById(R.id.playerFourButton);
+        buzzerStatistics = new BuzzerStatistics(getBaseContext());
 
         playerOneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                buzzerStatistics.incrementPlayerCount(PLAYER_SELECTION, "Player1");
+                buzzerStatistics.save(getBaseContext());
                 showDialog("Player 1 Clicked", "Press OK to restart");
             }
         });
         playerTwoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                buzzerStatistics.incrementPlayerCount(PLAYER_SELECTION, "Player2");
+                buzzerStatistics.save(getBaseContext());
                 showDialog("Player 2 Clicked", "Press OK to restart");
             }
         });
@@ -62,6 +68,8 @@ public class GameshowModeActivity extends AppCompatActivity {
             playerThreeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    buzzerStatistics.incrementPlayerCount(PLAYER_SELECTION, "Player3");
+                    buzzerStatistics.save(getBaseContext());
                     showDialog("Player 3 Clicked", "Press OK to restart");
                 }
             });
@@ -71,6 +79,8 @@ public class GameshowModeActivity extends AppCompatActivity {
             playerFourButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    buzzerStatistics.incrementPlayerCount(PLAYER_SELECTION, "Player4");
+                    buzzerStatistics.save(getBaseContext());
                     showDialog("Player 4 Clicked", "Press OK to restart");
                 }
             });
