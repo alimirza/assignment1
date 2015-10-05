@@ -22,13 +22,15 @@ import java.util.ArrayList;
  */
 public class BuzzerStatistics {
 
-    HashMap<String, HashMap<String, Integer>> playerCounts;
-    HashMap<String, Integer> twoPlayerMode;
-    HashMap<String, Integer> threePlayerMode;
-    HashMap<String, Integer> fourPlayerMode;
+    private HashMap<String, HashMap<String, Integer>> playerCounts;
+    private HashMap<String, Integer> twoPlayerMode;
+    private HashMap<String, Integer> threePlayerMode;
+    private HashMap<String, Integer> fourPlayerMode;
+    private Context context;
 
 
     public BuzzerStatistics(Context context) {
+        this.context = context;
         loadFromFile(context);
 
 
@@ -45,17 +47,17 @@ public class BuzzerStatistics {
     public ArrayList<String> getResultsList() {
         ArrayList<String> returnValue = new ArrayList<String>();
 
-        returnValue.add(String.valueOf(playerCounts.get("2").get("Player1")));
-        returnValue.add(String.valueOf(playerCounts.get("2").get("Player2")));
+        returnValue.add("2 Player Mode: Player 1 Buzzes = " + String.valueOf(playerCounts.get("2").get("Player1")));
+        returnValue.add("2 Player Mode: Player 2 Buzzes = " + String.valueOf(playerCounts.get("2").get("Player2")));
 
-        returnValue.add(String.valueOf(playerCounts.get("3").get("Player1")));
-        returnValue.add(String.valueOf(playerCounts.get("3").get("Player2")));
-        returnValue.add(String.valueOf(playerCounts.get("3").get("Player3")));
+        returnValue.add("3 Player Mode: Player 1 Buzzes = " + String.valueOf(playerCounts.get("3").get("Player1")));
+        returnValue.add("3 Player Mode: Player 2 Buzzes = " + String.valueOf(playerCounts.get("3").get("Player2")));
+        returnValue.add("3 Player Mode: Player 3 Buzzes = " + String.valueOf(playerCounts.get("3").get("Player3")));
 
-        returnValue.add(String.valueOf(playerCounts.get("4").get("Player1")));
-        returnValue.add(String.valueOf(playerCounts.get("4").get("Player2")));
-        returnValue.add(String.valueOf(playerCounts.get("4").get("Player3")));
-        returnValue.add(String.valueOf(playerCounts.get("4").get("Player4")));
+        returnValue.add("4 Player Mode: Player 1 Buzzes = " + String.valueOf(playerCounts.get("4").get("Player1")));
+        returnValue.add("4 Player Mode: Player 2 Buzzes = " + String.valueOf(playerCounts.get("4").get("Player2")));
+        returnValue.add("4 Player Mode: Player 3 Buzzes = " + String.valueOf(playerCounts.get("4").get("Player3")));
+        returnValue.add("4 Player Mode: Player 4 Buzzes = " + String.valueOf(playerCounts.get("4").get("Player4")));
         return returnValue;
     }
 
@@ -111,6 +113,33 @@ public class BuzzerStatistics {
             // TODO Auto-generated catch block
             throw new RuntimeException();
         }
+
+    }
+
+    public void clear() {
+        playerCounts = new HashMap<String,HashMap<String, Integer>>();
+        twoPlayerMode = new HashMap<String, Integer>();
+        threePlayerMode = new HashMap<String, Integer>();
+        fourPlayerMode = new HashMap<String, Integer>();
+
+        twoPlayerMode.put("Player1", 0);
+        twoPlayerMode.put("Player2", 0);
+
+        threePlayerMode.put("Player1", 0);
+        threePlayerMode.put("Player2", 0);
+        threePlayerMode.put("Player3", 0);
+
+        fourPlayerMode.put("Player1", 0);
+        fourPlayerMode.put("Player2", 0);
+        fourPlayerMode.put("Player3", 0);
+        fourPlayerMode.put("Player4", 0);
+
+        playerCounts.put("2", twoPlayerMode);
+        playerCounts.put("3", threePlayerMode);
+        playerCounts.put("4", fourPlayerMode);
+
+        save(this.context);
+
 
     }
 

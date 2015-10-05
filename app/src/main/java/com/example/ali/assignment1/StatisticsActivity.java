@@ -1,5 +1,6 @@
 package com.example.ali.assignment1;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -25,8 +26,11 @@ public class StatisticsActivity extends AppCompatActivity {
 
     private ListView listView;
     private Button showBuzzerStatsButton;
-    private ArrayList<String> reactionTimes = new ArrayList<String>();
-    public ArrayAdapter<String> adapter2;
+    private Button clearStatsButton;
+    private Button emailButton;
+    private ArrayAdapter<String> adapter2;
+    private ReactionTimeStatistics x;
+    private BuzzerStatistics y;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +38,14 @@ public class StatisticsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_statistics);
 
         showBuzzerStatsButton = (Button) findViewById(R.id.showBuzzerStatsButton);
+        clearStatsButton = (Button) findViewById(R.id.clearStatsButton);
+        emailButton = (Button) findViewById(R.id.emailButton);
         listView = (ListView) findViewById(R.id.listView);
 
-        ReactionTimeStatistics x = new ReactionTimeStatistics(getBaseContext());
-        BuzzerStatistics y = new BuzzerStatistics(getBaseContext());
+        x = new ReactionTimeStatistics(getBaseContext());
+        y = new BuzzerStatistics(getBaseContext());
 
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this,
+        final ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this,
                 R.layout.stats_list_item,R.id.listItemValue, x.getResultsList());
         listView.setAdapter(adapter1);
 
@@ -52,6 +58,41 @@ public class StatisticsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 listView.setAdapter(adapter2);
 
+            }
+        });
+
+        clearStatsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                x.clear();
+                y.clear();
+                listView.invalidate();
+            }
+        });
+
+        emailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String to = "dummy@email.com";
+                String subject = "ahmirza-reflex stats";
+                String message = "";
+                for (String item: x.getResultsList()){
+                    message = message + item + "\n";
+                }
+
+                for (String item: y.getResultsList()){
+                    message = message + item + "\n";
+                }
+
+                Intent email = new Intent(Intent.ACTION_SEND);
+                email.putExtra(Intent.EXTRA_EMAIL, new String[]{ to});
+                email.putExtra(Intent.EXTRA_SUBJECT, subject);
+                email.putExtra(Intent.EXTRA_TEXT, message);
+
+                //need this to prompts email client only
+                email.setType("message/rfc822");
+
+                startActivity(Intent.createChooser(email, "Choose an Email client :"));
             }
         });
 

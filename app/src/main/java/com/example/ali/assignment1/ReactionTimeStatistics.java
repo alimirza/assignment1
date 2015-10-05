@@ -23,6 +23,7 @@ public class ReactionTimeStatistics {
 
     private static final String REACTION_TIME_STATS = "file.sav";
     private ArrayList<Integer> allTimesList;
+    private Context context;
 
     public ArrayList<String> getResultsList() {
         return resultsList;
@@ -31,24 +32,25 @@ public class ReactionTimeStatistics {
     private ArrayList<String> resultsList;
 
     public ReactionTimeStatistics(Context context) {
+        this.context = context;
         loadFromFile(context);
         updateResultsList();
     }
 
     public void updateResultsList() {
         resultsList = new ArrayList<String>();
-        resultsList.add("empty");
-        resultsList.add("empty");
-        resultsList.add("empty");
-        resultsList.add("empty");
-        resultsList.add("empty");
-        resultsList.add("empty");
-        resultsList.add("empty");
-        resultsList.add("empty");
-        resultsList.add("empty");
-        resultsList.add("empty");
-        resultsList.add("empty");
-        resultsList.add("empty");
+        resultsList.add("Minimum time of all reaction times: NA");
+        resultsList.add("Minimum time of last 10 reaction times: NA");
+        resultsList.add("Minimum time of last 100 reaction times: NA");
+        resultsList.add("Maximum time of all reaction times: NA");
+        resultsList.add("Maximum time of last 10 reaction times: NA");
+        resultsList.add("Maximum time of last 100 reaction times: NA");
+        resultsList.add("Average time of all reaction times: NA");
+        resultsList.add("Average time of last 10 reaction times: NA");
+        resultsList.add("Average time of last 100 reaction times: NA");
+        resultsList.add("Median time of all reaction times: NA");
+        resultsList.add("Median time of last 10 reaction times: NA");
+        resultsList.add("Median time of last 100 reaction times: NA");
         if (allTimesList.size() > 0) {
             resultsList.set(0,"Minimum time of all reaction times: " + String.valueOf(Collections.min(allTimesList)));
             resultsList.set(3,"Maximum time of all reaction times: " + String.valueOf(Collections.max(allTimesList)));
@@ -138,6 +140,24 @@ public class ReactionTimeStatistics {
 
             return (lower + upper) / 2.0;
         }
+    }
+
+    public void clear() {
+        allTimesList = new ArrayList<Integer>();
+        resultsList = new ArrayList<String>();
+        resultsList.add("empty");
+        resultsList.add("empty");
+        resultsList.add("empty");
+        resultsList.add("empty");
+        resultsList.add("empty");
+        resultsList.add("empty");
+        resultsList.add("empty");
+        resultsList.add("empty");
+        resultsList.add("empty");
+        resultsList.add("empty");
+        resultsList.add("empty");
+        resultsList.add("empty");
+        save(context);
     }
 
 
